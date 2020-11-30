@@ -12,6 +12,7 @@ import Linkpage from './pages/linkpage'
 import ToDoListPage from './pages/todolist'
 import NotFound from './pages/404notfound'
 import NewsPage from './pages/newspage'
+import TabelJson from './pages/tabelJson'
 //#endregion
 
 export default class App extends Component {
@@ -26,6 +27,7 @@ export default class App extends Component {
               <Route path='/linkpage' component={Linkpage}/>
               <Route path='/toDoListpage' component={ToDoListPage}/>
               <Route path='/newspage' component={NewsPage}/>
+              <Route path='/tabelJSON' component={TabelJson}/>
               <Route path='*' component={NotFound}/>
            </Switch>
       </div>

@@ -43,6 +43,11 @@ export default class NavbarComponent extends React.Component {
                                     <Link to='/newspage'>News Page</Link>                        
                                 </Nav.Link>
                             </NavDropdown.Item>
+                            <NavDropdown.Item>
+                                <Nav.Link>
+                                    <Link to='/tabelJSON'>Tabel JSON</Link>                        
+                                </Nav.Link>
+                            </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     {/* <Form inline>
