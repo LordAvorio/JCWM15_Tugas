@@ -4,18 +4,24 @@ import {
     Navbar,
     Nav,
     NavDropdown,
-    Form,
-    FormControl,
-    Button,
-    Dropdown
+    Dropdown,
+    DropdownButton
 
 } from 'react-bootstrap'
 
 import {Link, LinkContainer} from 'react-router-dom'
 
+import {logout} from '../action'
+
+import {connect} from 'react-redux'
 
 
-export default class NavbarComponent extends React.Component {
+ class NavbarComponent extends React.Component {
+
+    handleLogout = () => {
+        this.props.logout()
+        localStorage.removeItem('username')
+    }
     
     render() {
         return (
@@ -33,29 +39,52 @@ export default class NavbarComponent extends React.Component {
                             <Link to='/carouselpage'>Carousel</Link>                        
                         </Nav.Link>
                         <NavDropdown title="Tugas" id="basic-nav-dropdown">
-                            <NavDropdown.Item>
-                                <Nav.Link>
-                                    <Link to='/toDoListpage'>To Do List</Link>                        
-                                </Nav.Link>
+                            <NavDropdown.Item as={Link} to='/toDoListpage'>
+                                To Do List                     
                             </NavDropdown.Item>
-                            <NavDropdown.Item>
-                                <Nav.Link>
-                                    <Link to='/newspage'>News Page</Link>                        
-                                </Nav.Link>
+                            <NavDropdown.Item as={Link} to='/newspage'>
+                                News Page                     
                             </NavDropdown.Item>
-                            <NavDropdown.Item>
-                                <Nav.Link>
-                                    <Link to='/tabelJSON'>Tabel JSON</Link>                        
-                                </Nav.Link>
+                            <NavDropdown.Item as={Link} to='/tabelJSON'>
+                                Tabel Json                     
+                            </NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to='/counter'>
+                                Counter                     
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    {/* <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-success">Search</Button>
-                    </Form> */}
+                    <Dropdown style={{marginRight: '45px'}}>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            {this.props.username ? this.props.username : "Username"}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            {this.props.username
+                                ? 
+                                <Dropdown.Item onClick={this.handleLogout}>Logout</Dropdown.Item>
+                                :
+                                <>
+                                    <Dropdown.Item as={Link} to='/login'>
+                                        Login
+                                    </Dropdown.Item>
+                                    <Dropdown.Item as={Link} to='/register'>
+                                        Register
+                                    </Dropdown.Item>
+                                </>
+                            }
+                        </Dropdown.Menu>
+                    </Dropdown>
+
                 </Navbar.Collapse>
             </Navbar>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        username: state.user.username
+    }
+}
+
+export default connect(mapStateToProps, {logout})(NavbarComponent)

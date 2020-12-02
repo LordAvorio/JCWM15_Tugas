@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Form, Button, Table, Container, Row, Col } from "react-bootstrap";
 import '../css/jsonTable.css'
 
+
 export default class TabelJson extends Component {
   constructor(props) {
     super(props);
